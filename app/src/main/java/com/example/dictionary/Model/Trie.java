@@ -31,8 +31,8 @@ public class Trie {
                 p=p.children[index];
             }
         }
-        p.value= MainActivity.STEP;
-        MainActivity.STEP++;
+        p.value= MainActivity.INDEX;
+        MainActivity.INDEX++;
     }
 
     public int search(String word){

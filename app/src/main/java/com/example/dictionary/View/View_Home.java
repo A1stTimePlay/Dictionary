@@ -6,81 +6,72 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.example.dictionary.MainActivity;
+import com.example.dictionary.Presenter.Presenter_Home;
 import com.example.dictionary.R;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class View_Home extends AppCompatActivity {
+public class View_Home extends AppCompatActivity implements IView_Home {
+    TextView tvWord;
+    TextView tvMeaning;
+
+    Presenter_Home presenter_home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        final EditText et = findViewById(R.id.Word);
+        presenter_home = new Presenter_Home(this);
+        final EditText etWord = findViewById(R.id.Word);
+        final EditText etMeaning = findViewById(R.id.Meaning);
         Button write = findViewById(R.id.write);
         Button read = findViewById(R.id.read);
-
-        final File word = new File(View_Home.this.getFilesDir(), "word.txt");
-        if (!word.exists()) {
-            try {
-                word.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        final File meaning = new File(View_Home.this.getFilesDir(), "meaning.txt");
-        if (!meaning.exists()) {
-            try {
-                meaning.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        final EditText etNumber = findViewById(R.id.number);
+        tvWord = findViewById(R.id.tvWord);
+        tvMeaning = findViewById(R.id.tvMeaning);
 
         write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String data = et.getText().toString().trim();
-                if (data.length() != 0) {
-                    try {
-                        FileWriter writer = new FileWriter(word, true);
-                        BufferedWriter bufferedWriter = new BufferedWriter(writer);
-                        bufferedWriter.write(data);
-                        bufferedWriter.newLine();
-                        bufferedWriter.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                String word = etWord.getText().toString().trim().toLowerCase();
+                String meaning = etMeaning.getText().toString().trim().toLowerCase();
+                if (word.length() != 0 && meaning.length() != 0) {
+                    presenter_home.write(word, meaning);
+                } else {
+                    System.out.println("Input all required field");
                 }
             }
         });
         read.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StringBuilder result = new StringBuilder();
-                try {
-                    FileReader reader = new FileReader(word);
-                    BufferedReader bufferedReader = new BufferedReader(reader);
-                    String line;
-                    while((line=bufferedReader.readLine())!=null){
-                        result.append(line).append("\n");
+                String number = etNumber.getText().toString().trim();
+                if (number.length() != 0) {
+                    int step = Integer.parseInt(number);
+                    if (step < MainActivity.WORD_FILE_LENGTH / MainActivity.MAX_WORD_CHARACTER) {
+                        presenter_home.read(step);
                     }
-                    bufferedReader.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } else {
+                    System.out.println("Input all required field");
                 }
-                System.out.println(result);
             }
         });
+    }
+
+    @Override
+    public void showOnTextView(String word, String meaning) {
+        tvWord.setText(word);
+        tvMeaning.setText(meaning);
     }
 }
