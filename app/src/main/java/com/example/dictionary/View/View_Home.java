@@ -6,25 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.dictionary.MainActivity;
 import com.example.dictionary.Presenter.Presenter_Home;
 import com.example.dictionary.R;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-
 public class View_Home extends AppCompatActivity implements IView_Home {
-    TextView tvWord;
-    TextView tvMeaning;
+    EditText tvWord;
+    EditText tvMeaning;
 
     Presenter_Home presenter_home;
 
@@ -33,13 +22,13 @@ public class View_Home extends AppCompatActivity implements IView_Home {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         presenter_home = new Presenter_Home(this);
-        final EditText etWord = findViewById(R.id.Word);
-        final EditText etMeaning = findViewById(R.id.Meaning);
+        final EditText etWord = findViewById(R.id.etWordAdd);
+        final EditText etMeaning = findViewById(R.id.etMeaningAdd);
         Button write = findViewById(R.id.write);
         Button read = findViewById(R.id.read);
         final EditText etNumber = findViewById(R.id.number);
-        tvWord = findViewById(R.id.tvWord);
-        tvMeaning = findViewById(R.id.tvMeaning);
+        tvWord = findViewById(R.id.etWordRead);
+        tvMeaning = findViewById(R.id.etMeaningRead);
 
         write.setOnClickListener(new View.OnClickListener() {
             @Override
