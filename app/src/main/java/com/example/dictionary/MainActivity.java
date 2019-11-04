@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.dictionary.View.View_Home;
 import com.example.dictionary.View.View_Search;
@@ -16,6 +17,8 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
     public static File WORD;
     public static File MEANING;
+    public static File tempWORD;
+    public static File tempMEANING;
     public static final int MAX_WORD_CHARACTER = 10;
     public static final int MAX_MEANING_CHARACTER = 50;
 
@@ -26,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
         WORD = new File(this.getFilesDir(), "word.txt");
         MEANING = new File(this.getFilesDir(), "meaning.txt");
+        tempWORD = new File(this.getFilesDir(), "temp_word.txt");
+        tempMEANING = new File(this.getFilesDir(),"temp_meaning.txt");
 
         try {
             if (!WORD.exists()) {

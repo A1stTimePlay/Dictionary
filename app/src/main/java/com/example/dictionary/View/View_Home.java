@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.dictionary.MainActivity;
-import com.example.dictionary.Model.Trie;
 import com.example.dictionary.Presenter.Presenter_Home;
 import com.example.dictionary.R;
 
@@ -23,8 +22,8 @@ public class View_Home extends AppCompatActivity implements IView_Home {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         presenter_home = new Presenter_Home(this);
-        final EditText etWord = findViewById(R.id.etWordAdd);
-        final EditText etMeaning = findViewById(R.id.etMeaningAdd);
+        final EditText etWordAdd = findViewById(R.id.etWordAdd);
+        final EditText etMeaningAdd = findViewById(R.id.etMeaningAdd);
         Button write = findViewById(R.id.write);
         Button read = findViewById(R.id.read);
         Button delete = findViewById(R.id.delete);
@@ -36,8 +35,8 @@ public class View_Home extends AppCompatActivity implements IView_Home {
         write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String word = etWord.getText().toString().trim().toLowerCase();
-                String meaning = etMeaning.getText().toString().trim().toLowerCase();
+                String word = etWordAdd.getText().toString().trim().toLowerCase();
+                String meaning = etMeaningAdd.getText().toString().trim().toLowerCase();
                 if (word.length() != 0 && meaning.length() != 0) {
                     presenter_home.write(MainActivity.WORD, MainActivity.MEANING ,word, meaning);
                 } else {
@@ -60,7 +59,8 @@ public class View_Home extends AppCompatActivity implements IView_Home {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                String word = etWordDelete.getText().toString();
+                presenter_home.delete(MainActivity.WORD, MainActivity.MEANING, word);
             }
         });
     }
