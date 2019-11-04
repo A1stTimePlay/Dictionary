@@ -19,26 +19,6 @@ public class Presenter_Search implements IPresenter_Search{
     }
 
     @Override
-    public void createTrie(Trie trie) {
-        try {
-            FileInputStream fileInputStream = new FileInputStream(MainActivity.WORD);
-            for (int i = 0; i < MainActivity.WORD_FILE_LENGTH / MAX_WORD_CHARACTER; i++) {
-                StringBuilder word = new StringBuilder();
-                for (int j = 0; j < MAX_WORD_CHARACTER; j++) {
-                    word.append((char) fileInputStream.read());
-                }
-                String resultWord = word.toString().trim();
-                trie.insert(resultWord);
-            }
-            MainActivity.INDEX = 0;
-        } catch (FileNotFoundException e) {
-            System.out.println("Presenter_Search: " + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Presenter_Search: " + e.getMessage());
-        }
-    }
-
-    @Override
     public void findMeaning(int index) {
         if (index==-1){
             view_search.showOnTextView("word not found");

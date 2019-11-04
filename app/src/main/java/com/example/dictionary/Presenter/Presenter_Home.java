@@ -1,8 +1,10 @@
 package com.example.dictionary.Presenter;
 
 import com.example.dictionary.MainActivity;
+import com.example.dictionary.Model.Trie;
 import com.example.dictionary.View.View_Home;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,8 +12,6 @@ import java.io.IOException;
 
 import static com.example.dictionary.MainActivity.MAX_MEANING_CHARACTER;
 import static com.example.dictionary.MainActivity.MAX_WORD_CHARACTER;
-import static com.example.dictionary.MainActivity.MEANING_FILE_LENGTH;
-import static com.example.dictionary.MainActivity.WORD_FILE_LENGTH;
 
 public class Presenter_Home implements IPresenter_Home {
     View_Home view_home;
@@ -21,8 +21,8 @@ public class Presenter_Home implements IPresenter_Home {
     }
 
     @Override
-    public void read(int step) {
-        if (step*MAX_WORD_CHARACTER> WORD_FILE_LENGTH){
+    public void read(File fileWord, File fileMeaning, int step) {
+        if (step*MAX_WORD_CHARACTER> fileWord.length()){
             System.out.println("Step lố size của file");
             return;
         } else {
@@ -30,8 +30,8 @@ public class Presenter_Home implements IPresenter_Home {
             StringBuilder word = new StringBuilder();
             StringBuilder meaning = new StringBuilder();
             try {
-                FileInputStream fisWord = new FileInputStream(MainActivity.WORD);
-                FileInputStream fisMeaning = new FileInputStream(MainActivity.MEANING);
+                FileInputStream fisWord = new FileInputStream(fileWord);
+                FileInputStream fisMeaning = new FileInputStream(fileMeaning);
                 fisWord.skip(step * 10);
                 fisMeaning.skip(step * 50);
 
@@ -62,14 +62,14 @@ public class Presenter_Home implements IPresenter_Home {
     }
 
     @Override
-    public void write(String word, String meaning) {
+    public void write(File fileWord, File fileMeaning, String word, String meaning) {
 
         int currentCharacter;
         char blank = ' ';
         try {
-            FileWriter fwWord = new FileWriter(MainActivity.WORD, true);
+            FileWriter fwWord = new FileWriter(fileWord, true);
 
-            FileWriter fwMeaning = new FileWriter(MainActivity.MEANING, true);
+            FileWriter fwMeaning = new FileWriter(fileMeaning, true);
 
             currentCharacter = 0;
             while (currentCharacter < MAX_WORD_CHARACTER) {
@@ -92,12 +92,16 @@ public class Presenter_Home implements IPresenter_Home {
 
             fwWord.close();
             fwMeaning.close();
-            WORD_FILE_LENGTH = MainActivity.WORD.length();  // cập nhập lại size của file sau khi thêm vào
-            MEANING_FILE_LENGTH = MainActivity.MEANING.length();
         } catch (FileNotFoundException e) {
             System.out.println("Presenter_Home: " + e.getMessage());
         } catch (IOException e) {
             System.out.println("Presenter_Home: " + e.getMessage());
         }
+    }
+
+    @Override
+    public void delete(String word) {
+        Trie trie = new Trie();
+        trie.create(MainActivity.WORD, MAX_WORD_CHARACTER);
     }
 }

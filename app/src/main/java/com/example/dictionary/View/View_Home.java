@@ -8,13 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.dictionary.MainActivity;
+import com.example.dictionary.Model.Trie;
 import com.example.dictionary.Presenter.Presenter_Home;
 import com.example.dictionary.R;
 
 public class View_Home extends AppCompatActivity implements IView_Home {
-    EditText tvWord;
-    EditText tvMeaning;
-
+    EditText etWordRead;
+    EditText etMeaningRead;
+    EditText etWordDelete;
     Presenter_Home presenter_home;
 
     @Override
@@ -26,9 +27,11 @@ public class View_Home extends AppCompatActivity implements IView_Home {
         final EditText etMeaning = findViewById(R.id.etMeaningAdd);
         Button write = findViewById(R.id.write);
         Button read = findViewById(R.id.read);
+        Button delete = findViewById(R.id.delete);
         final EditText etNumber = findViewById(R.id.number);
-        tvWord = findViewById(R.id.etWordRead);
-        tvMeaning = findViewById(R.id.etMeaningRead);
+        etWordRead = findViewById(R.id.etWordRead);
+        etMeaningRead = findViewById(R.id.etMeaningRead);
+        etWordDelete = findViewById(R.id.etWordDelete);
 
         write.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,7 +39,7 @@ public class View_Home extends AppCompatActivity implements IView_Home {
                 String word = etWord.getText().toString().trim().toLowerCase();
                 String meaning = etMeaning.getText().toString().trim().toLowerCase();
                 if (word.length() != 0 && meaning.length() != 0) {
-                    presenter_home.write(word, meaning);
+                    presenter_home.write(MainActivity.WORD, MainActivity.MEANING ,word, meaning);
                 } else {
                     System.out.println("Input all required field");
                 }
@@ -48,19 +51,29 @@ public class View_Home extends AppCompatActivity implements IView_Home {
                 String number = etNumber.getText().toString().trim();
                 if (number.length() != 0) {
                     int step = Integer.parseInt(number);
-                    if (step < MainActivity.WORD_FILE_LENGTH / MainActivity.MAX_WORD_CHARACTER) {
-                        presenter_home.read(step);
-                    }
+                        presenter_home.read(MainActivity.WORD, MainActivity.MEANING, step);
                 } else {
                     System.out.println("Input all required field");
                 }
+            }
+        });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
 
     @Override
     public void showOnTextView(String word, String meaning) {
-        tvWord.setText(word);
-        tvMeaning.setText(meaning);
+        etWordRead.setText(word);
+        etMeaningRead.setText(meaning);
     }
+
+    @Override
+    public void deleteCallBack() {
+
+    }
+
 }
