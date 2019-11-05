@@ -1,6 +1,5 @@
 package com.example.dictionary.Presenter;
 
-import com.example.dictionary.MainActivity;
 import com.example.dictionary.Model.Trie;
 import com.example.dictionary.View.View_Home;
 
@@ -24,8 +23,8 @@ public class Presenter_Home implements IPresenter_Home {
     }
 
     @Override
-    public void read(File fileWord, File fileMeaning, int step) {
-        if (step*MAX_WORD_CHARACTER> fileWord.length()){
+    public void read(File fileWord, File fileMeaning, int index) {
+        if (index * MAX_WORD_CHARACTER > fileWord.length()) {
             System.out.println("Step lố size của file");
             return;
         } else {
@@ -35,8 +34,8 @@ public class Presenter_Home implements IPresenter_Home {
             try {
                 FileInputStream fisWord = new FileInputStream(fileWord);
                 FileInputStream fisMeaning = new FileInputStream(fileMeaning);
-                fisWord.skip(step * MAX_WORD_CHARACTER);
-                fisMeaning.skip(step * MAX_MEANING_CHARACTER);
+                fisWord.skip(index * MAX_WORD_CHARACTER);
+                fisMeaning.skip(index * MAX_MEANING_CHARACTER);
 
                 currentCharacter = 0;
                 while (currentCharacter < MAX_WORD_CHARACTER) {
@@ -66,61 +65,71 @@ public class Presenter_Home implements IPresenter_Home {
 
     @Override
     public void write(File fileWord, File fileMeaning, String word, String meaning) {
+        // Tạo trie để tìm xe chữ đã có trong file hay chưa
+        Trie trie = new Trie();
+        trie.create(fileWord, MAX_WORD_CHARACTER);
 
         int currentCharacter;
         char blank = ' ';
-        try {
-            FileWriter fwWord = new FileWriter(fileWord, true);
+        if (trie.search(word) != -1) {
+            System.out.println("Word already added");
+        } else {
+            try {
+                FileWriter fwWord = new FileWriter(fileWord, true);
 
-            FileWriter fwMeaning = new FileWriter(fileMeaning, true);
+                FileWriter fwMeaning = new FileWriter(fileMeaning, true);
 
-            currentCharacter = 0;
-            while (currentCharacter < MAX_WORD_CHARACTER) {
-                for (; currentCharacter < word.length(); currentCharacter++) {
-                    fwWord.append(word.charAt(currentCharacter));
+                currentCharacter = 0;
+                while (currentCharacter < MAX_WORD_CHARACTER) {
+                    for (; currentCharacter < word.length(); currentCharacter++) {
+                        fwWord.append(word.charAt(currentCharacter));
+                    }
+                    currentCharacter++;
+                    fwWord.append(blank);
                 }
-                currentCharacter++;
-                fwWord.append(" ");
-            }
 
 
-            currentCharacter = 0;
-            while (currentCharacter < MAX_MEANING_CHARACTER) {
-                for (; currentCharacter < meaning.length(); currentCharacter++) {
-                    fwMeaning.append(meaning.charAt(currentCharacter));
+                currentCharacter = 0;
+                while (currentCharacter < MAX_MEANING_CHARACTER) {
+                    for (; currentCharacter < meaning.length(); currentCharacter++) {
+                        fwMeaning.append(meaning.charAt(currentCharacter));
+                    }
+                    currentCharacter++;
+                    fwMeaning.append(blank);
                 }
-                currentCharacter++;
-                fwMeaning.append(blank);
-            }
 
-            fwWord.close();
-            fwMeaning.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Presenter_Home: " + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Presenter_Home: " + e.getMessage());
+                fwWord.close();
+                fwMeaning.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("Presenter_Home: " + e.getMessage());
+            } catch (IOException e) {
+                System.out.println("Presenter_Home: " + e.getMessage());
+            }
         }
     }
 
     @Override
     public void delete(File fileWord, File fileMeaning, String word) {
+        // Tạo trie để tìm xem chữ đã có trong file hay chưa
         Trie trie = new Trie();
-        trie.create(MainActivity.WORD, MAX_WORD_CHARACTER);
+        trie.create(fileWord, MAX_WORD_CHARACTER);
+
         int index = trie.search(word);
         int byteRead;
         if (index == -1) {
             System.out.println("word not found");
             return;
-        } else{
+        } else {
             try {
                 // Xóa chữ trong file Word
+
                 // Copy các chữ không xóa vào file tạm tempWORD
                 FileInputStream fisWord = new FileInputStream(fileWord);
                 FileOutputStream fosTempWord = new FileOutputStream(tempWORD);
-                for (int i=0; i<fileWord.length()/MAX_WORD_CHARACTER; i++) {
-                    if (i== index) fisWord.skip(MAX_WORD_CHARACTER);
+                for (int i = 0; i < fileWord.length() / MAX_WORD_CHARACTER; i++) {
+                    if (i == index) fisWord.skip(MAX_WORD_CHARACTER);
                     else {
-                        for (int j=0;j <MAX_WORD_CHARACTER; j++){
+                        for (int j = 0; j < MAX_WORD_CHARACTER; j++) {
                             fosTempWord.write(fisWord.read());
                         }
                     }
@@ -132,7 +141,7 @@ public class Presenter_Home implements IPresenter_Home {
                 FileInputStream fisTempWord = new FileInputStream(tempWORD);
                 FileOutputStream fosWord = new FileOutputStream(fileWord);
 
-                while ((byteRead = fisTempWord.read())!=-1){
+                while ((byteRead = fisTempWord.read()) != -1) {
                     fosWord.write(byteRead);
                 }
                 fisTempWord.close();
@@ -142,10 +151,10 @@ public class Presenter_Home implements IPresenter_Home {
                 // Copy các chữ không xóa vào file tạm tempMEANING
                 FileInputStream fisMeaning = new FileInputStream(fileMeaning);
                 FileOutputStream fosTempMeaning = new FileOutputStream(tempMEANING);
-                for (int i=0; i<fileMeaning.length()/MAX_MEANING_CHARACTER; i++) {
-                    if (i== index) fisMeaning.skip(MAX_MEANING_CHARACTER);
+                for (int i = 0; i < fileMeaning.length() / MAX_MEANING_CHARACTER; i++) {
+                    if (i == index) fisMeaning.skip(MAX_MEANING_CHARACTER);
                     else {
-                        for (int j=0;j <MAX_MEANING_CHARACTER; j++){
+                        for (int j = 0; j < MAX_MEANING_CHARACTER; j++) {
                             fosTempMeaning.write(fisMeaning.read());
                         }
                     }
@@ -156,7 +165,7 @@ public class Presenter_Home implements IPresenter_Home {
                 // Copy các chữ trong file tạm tempMEANING vào lại file gốc MEANING
                 FileInputStream fisTempMeaning = new FileInputStream(tempMEANING);
                 FileOutputStream fosMeaning = new FileOutputStream(fileMeaning);
-                while ((byteRead = fisTempMeaning.read())!=-1){
+                while ((byteRead = fisTempMeaning.read()) != -1) {
                     fosMeaning.write(byteRead);
                 }
                 fisTempWord.close();
@@ -169,5 +178,49 @@ public class Presenter_Home implements IPresenter_Home {
             }
         }
 
+    }
+
+    @Override
+    public void update(File fileWord, File fileMeaning, String word, String meaning) {
+        Trie trie = new Trie();
+        trie.create(fileWord, MAX_WORD_CHARACTER);
+
+        int index = trie.search(word);
+
+        if (index == -1) {
+            System.out.println("Word not found");
+            return;
+        } else {
+            try {
+                FileInputStream fisMeaning = new FileInputStream(fileMeaning);
+                FileOutputStream fosTempMeaning = new FileOutputStream(tempMEANING);
+                for (int i = 0; i < fileMeaning.length() / MAX_MEANING_CHARACTER; i++) {
+                    if (i == index) {
+                        fisMeaning.skip(MAX_MEANING_CHARACTER);
+                        int current_character = 0;
+                        while (current_character<MAX_MEANING_CHARACTER){
+                            while (current_character < meaning.length()){
+                                fosTempMeaning.write(meaning.charAt(current_character));
+                                current_character++;
+                            }
+                            fosTempMeaning.write(' ');
+                            current_character++;
+                        }
+                    }
+                    else {
+                        for (int j = 0; j < MAX_MEANING_CHARACTER; j++) {
+                            fosTempMeaning.write(fisMeaning.read());
+                        }
+                    }
+                }
+                fisMeaning.close();
+                fosTempMeaning.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("Presenter_Home: " + e.getMessage());
+            } catch (IOException e) {
+                System.out.println("Presenter_Home: " + e.getMessage());
+            }
+
+        }
     }
 }

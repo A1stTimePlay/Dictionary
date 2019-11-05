@@ -27,6 +27,7 @@ public class View_Home extends AppCompatActivity implements IView_Home {
         Button write = findViewById(R.id.write);
         Button read = findViewById(R.id.read);
         Button delete = findViewById(R.id.delete);
+        Button update = findViewById(R.id.update);
         final EditText etNumber = findViewById(R.id.number);
         etWordRead = findViewById(R.id.etWordRead);
         etMeaningRead = findViewById(R.id.etMeaningRead);

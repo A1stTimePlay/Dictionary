@@ -72,9 +72,9 @@ public class Trie {
                 this.insert(resultWord);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Presenter_Search: " + e.getMessage());
+            System.out.println("Trie create " + e.getMessage());
         } catch (IOException e) {
-            System.out.println("Presenter_Search: " + e.getMessage());
+            System.out.println("Trie create " + e.getMessage());
         }
     }
 }
