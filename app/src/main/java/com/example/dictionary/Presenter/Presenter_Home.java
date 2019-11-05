@@ -168,8 +168,8 @@ public class Presenter_Home implements IPresenter_Home {
                 while ((byteRead = fisTempMeaning.read()) != -1) {
                     fosMeaning.write(byteRead);
                 }
-                fisTempWord.close();
-                fosWord.close();
+                fisTempMeaning.close();
+                fosMeaning.close();
 
             } catch (FileNotFoundException e) {
                 System.out.println("Presenter_Home: " + e.getMessage());
@@ -186,6 +186,7 @@ public class Presenter_Home implements IPresenter_Home {
         trie.create(fileWord, MAX_WORD_CHARACTER);
 
         int index = trie.search(word);
+        int byteRead;
 
         if (index == -1) {
             System.out.println("Word not found");
@@ -212,6 +213,14 @@ public class Presenter_Home implements IPresenter_Home {
                             fosTempMeaning.write(fisMeaning.read());
                         }
                     }
+
+                    FileInputStream fisTempMeaning = new FileInputStream(tempMEANING);
+                    FileOutputStream fosMeaning = new FileOutputStream(fileMeaning);
+                    while ((byteRead = fisTempMeaning.read()) != -1) {
+                        fosMeaning.write(byteRead);
+                    }
+                    fisTempMeaning.close();
+                    fisMeaning.close();
                 }
                 fisMeaning.close();
                 fosTempMeaning.close();
