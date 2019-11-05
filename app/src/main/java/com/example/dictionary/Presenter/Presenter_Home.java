@@ -221,7 +221,7 @@ public class Presenter_Home implements IPresenter_Home {
                 }
                 fisTempMeaning.close();
                 fisMeaning.close();
-                
+
             } catch (FileNotFoundException e) {
                 System.out.println("Presenter_Home: " + e.getMessage());
             } catch (IOException e) {
