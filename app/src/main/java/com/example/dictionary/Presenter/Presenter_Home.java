@@ -199,31 +199,29 @@ public class Presenter_Home implements IPresenter_Home {
                     if (i == index) {
                         fisMeaning.skip(MAX_MEANING_CHARACTER);
                         int current_character = 0;
-                        while (current_character<MAX_MEANING_CHARACTER){
-                            while (current_character < meaning.length()){
+                        while (current_character < MAX_MEANING_CHARACTER) {
+                            while (current_character < meaning.length()) {
                                 fosTempMeaning.write(meaning.charAt(current_character));
                                 current_character++;
                             }
                             fosTempMeaning.write(' ');
                             current_character++;
                         }
-                    }
-                    else {
+                    } else {
                         for (int j = 0; j < MAX_MEANING_CHARACTER; j++) {
                             fosTempMeaning.write(fisMeaning.read());
                         }
                     }
-
-                    FileInputStream fisTempMeaning = new FileInputStream(tempMEANING);
-                    FileOutputStream fosMeaning = new FileOutputStream(fileMeaning);
-                    while ((byteRead = fisTempMeaning.read()) != -1) {
-                        fosMeaning.write(byteRead);
-                    }
-                    fisTempMeaning.close();
-                    fisMeaning.close();
                 }
+
+                FileInputStream fisTempMeaning = new FileInputStream(tempMEANING);
+                FileOutputStream fosMeaning = new FileOutputStream(fileMeaning);
+                while ((byteRead = fisTempMeaning.read()) != -1) {
+                    fosMeaning.write(byteRead);
+                }
+                fisTempMeaning.close();
                 fisMeaning.close();
-                fosTempMeaning.close();
+                
             } catch (FileNotFoundException e) {
                 System.out.println("Presenter_Home: " + e.getMessage());
             } catch (IOException e) {
