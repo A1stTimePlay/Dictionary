@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:hint="Number"
+            android:hint="Index"
             android:inputType="numberSigned"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvRead" />
@@ -122,7 +122,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:text="Add"
-            android:textSize="20dp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -133,7 +133,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:text="Delete"
-            android:textSize="20dp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line1" />
 
@@ -144,7 +144,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:text="Update"
-            android:textSize="20dp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line" />
 
@@ -155,7 +155,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:text="Read"
-            android:textSize="20dp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line2" />
 
@@ -187,7 +187,7 @@
             android:layout_marginTop="24dp"
             android:background="@color/gray"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText2" />
+            app:layout_constraintTop_toBottomOf="@+id/etMeaningUpdate" />
 
         <EditText
             android:id="@+id/etWordUpdate"
@@ -202,7 +202,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvUpdate" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/etMeaningUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"

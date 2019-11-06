@@ -51,7 +51,7 @@ public class Presenter_Home implements IPresenter_Home {
                 }
                 String resultMeaning = meaning.toString().trim();
 
-                view_home.showOnTextView(resultWord, resultMeaning);
+                view_home.readCallBack(resultWord, resultMeaning);
                 fisWord.close();
                 fisMeaning.close();
 
@@ -72,7 +72,7 @@ public class Presenter_Home implements IPresenter_Home {
         int currentCharacter;
         char blank = ' ';
         if (trie.search(word) != -1) {
-            System.out.println("Word already added");
+            view_home.addCallBack(word, -1);
         } else {
             try {
                 FileWriter fwWord = new FileWriter(fileWord, true);
@@ -100,6 +100,8 @@ public class Presenter_Home implements IPresenter_Home {
 
                 fwWord.close();
                 fwMeaning.close();
+
+                view_home.addCallBack(word, 0);
             } catch (FileNotFoundException e) {
                 System.out.println("Presenter_Home: " + e.getMessage());
             } catch (IOException e) {
@@ -117,7 +119,7 @@ public class Presenter_Home implements IPresenter_Home {
         int index = trie.search(word);
         int byteRead;
         if (index == -1) {
-            System.out.println("word not found");
+            view_home.deleteCallBack(word, -1);
             return;
         } else {
             try {
@@ -171,6 +173,8 @@ public class Presenter_Home implements IPresenter_Home {
                 fisTempMeaning.close();
                 fosMeaning.close();
 
+                view_home.deleteCallBack(word, 0);
+
             } catch (FileNotFoundException e) {
                 System.out.println("Presenter_Home: " + e.getMessage());
             } catch (IOException e) {
@@ -189,7 +193,7 @@ public class Presenter_Home implements IPresenter_Home {
         int byteRead;
 
         if (index == -1) {
-            System.out.println("Word not found");
+            view_home.updateCallBack(word, -1);
             return;
         } else {
             try {
@@ -221,6 +225,8 @@ public class Presenter_Home implements IPresenter_Home {
                 }
                 fisTempMeaning.close();
                 fisMeaning.close();
+
+                view_home.updateCallBack(word, 0);
 
             } catch (FileNotFoundException e) {
                 System.out.println("Presenter_Home: " + e.getMessage());

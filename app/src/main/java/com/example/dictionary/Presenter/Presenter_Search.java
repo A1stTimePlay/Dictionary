@@ -1,7 +1,6 @@
 package com.example.dictionary.Presenter;
 
 import com.example.dictionary.MainActivity;
-import com.example.dictionary.Model.Trie;
 import com.example.dictionary.View.View_Search;
 
 import java.io.FileInputStream;
@@ -9,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static com.example.dictionary.MainActivity.MAX_MEANING_CHARACTER;
-import static com.example.dictionary.MainActivity.MAX_WORD_CHARACTER;
 
 public class Presenter_Search implements IPresenter_Search{
     View_Search view_search;
