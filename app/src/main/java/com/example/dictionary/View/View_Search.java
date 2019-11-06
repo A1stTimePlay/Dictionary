@@ -2,11 +2,10 @@ package com.example.dictionary.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dictionary.MainActivity;
@@ -15,9 +14,9 @@ import com.example.dictionary.Presenter.Presenter_Search;
 import com.example.dictionary.R;
 
 public class View_Search extends AppCompatActivity implements IView_Search{
-    private Trie trie;
     Presenter_Search presenter_search;
     TextView tvSearchMeaning;
+    Trie trie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +24,11 @@ public class View_Search extends AppCompatActivity implements IView_Search{
         setContentView(R.layout.activity_search);
         final EditText etSearchBar = findViewById(R.id.search_bar);
         tvSearchMeaning= findViewById(R.id.tvSearchMeaning);
-        Button btnSearch = findViewById(R.id.btnSearch);
+        ImageView btnSearch = findViewById(R.id.btnSearch);
 
         trie = new Trie();
+        trie.create(MainActivity.WORD, MainActivity.MAX_WORD_CHARACTER);
         presenter_search = new Presenter_Search(this);
-        presenter_search.createTrie(trie);
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,11 +37,6 @@ public class View_Search extends AppCompatActivity implements IView_Search{
                 presenter_search.findMeaning(result);
             }
         });
-    }
-
-    @Override
-    public void createTrieCallBack(Trie trie) {
-        this.trie = trie;
     }
 
     @Override

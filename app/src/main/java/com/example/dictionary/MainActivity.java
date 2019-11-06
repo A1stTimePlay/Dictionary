@@ -14,13 +14,12 @@ import java.io.File;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
-    public static int INDEX = 0;
     public static File WORD;
     public static File MEANING;
+    public static File tempWORD;
+    public static File tempMEANING;
     public static final int MAX_WORD_CHARACTER = 10;
     public static final int MAX_MEANING_CHARACTER = 50;
-    public static long WORD_FILE_LENGTH;
-    public static long MEANING_FILE_LENGTH;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         WORD = new File(this.getFilesDir(), "word.txt");
         MEANING = new File(this.getFilesDir(), "meaning.txt");
-        WORD_FILE_LENGTH = WORD.length();
-        MEANING_FILE_LENGTH = MEANING.length();
+        tempWORD = new File(this.getFilesDir(), "temp_word.txt");
+        tempMEANING = new File(this.getFilesDir(),"temp_meaning.txt");
 
         try {
             if (!WORD.exists()) {

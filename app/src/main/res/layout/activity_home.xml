@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:hint="Number"
+            android:hint="Index"
             android:inputType="numberSigned"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvRead" />
@@ -122,7 +122,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:text="Add"
-            android:textSize="20dp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -133,7 +133,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:text="Delete"
-            android:textSize="20dp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line1" />
 
@@ -144,7 +144,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:text="Update"
-            android:textSize="20dp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line" />
 
@@ -155,7 +155,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:text="Read"
-            android:textSize="20dp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line2" />
 
@@ -187,7 +187,41 @@
             android:layout_marginTop="24dp"
             android:background="@color/gray"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etMeaningUpdate" />
+
+        <EditText
+            android:id="@+id/etWordUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="Word"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvUpdate" />
+
+        <EditText
+            android:id="@+id/etMeaningUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="Meaning"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etWordUpdate" />
+
+        <Button
+            android:id="@+id/update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="128dp"
+            android:layout_marginEnd="24dp"
+            android:text="Update"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
