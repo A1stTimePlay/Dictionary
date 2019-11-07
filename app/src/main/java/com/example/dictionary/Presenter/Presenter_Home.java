@@ -25,7 +25,7 @@ public class Presenter_Home implements IPresenter_Home {
     @Override
     public void read(File fileWord, File fileMeaning, int index) {
         if (index * MAX_WORD_CHARACTER > fileWord.length()) {
-            System.out.println("Step lố size của file");
+            view_home.readCallBack(" ", " ", -1);
             return;
         } else {
             int currentCharacter;
@@ -51,7 +51,7 @@ public class Presenter_Home implements IPresenter_Home {
                 }
                 String resultMeaning = meaning.toString().trim();
 
-                view_home.readCallBack(resultWord, resultMeaning);
+                view_home.readCallBack(resultWord, resultMeaning, 0);
                 fisWord.close();
                 fisMeaning.close();
 
