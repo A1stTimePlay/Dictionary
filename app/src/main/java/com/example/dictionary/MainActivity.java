@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public static File tempWORD;
     public static File tempMEANING;
     public static final int MAX_WORD_CHARACTER = 10;
-    public static final int MAX_MEANING_CHARACTER = 50;
+    public static final int MAX_MEANING_CHARACTER = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

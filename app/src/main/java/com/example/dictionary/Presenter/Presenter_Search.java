@@ -26,7 +26,7 @@ public class Presenter_Search implements IPresenter_Search{
             StringBuilder meaning = new StringBuilder();
             try {
                 FileInputStream fisMeaning = new FileInputStream(MainActivity.MEANING);
-                fisMeaning.skip(index * 50);
+                fisMeaning.skip(index * MAX_MEANING_CHARACTER);
 
                 currentCharacter = 0;
                 while (currentCharacter < MAX_MEANING_CHARACTER) {

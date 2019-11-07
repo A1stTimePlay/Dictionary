@@ -84,9 +84,11 @@ public class View_Home extends AppCompatActivity implements IView_Home {
 
     @Override
     public void addCallBack(String word, int status) {
-        if (status == 0)
+        if (status == 0) {
+            etWordAdd.setText("");
+            etMeaningAdd.setText("");
             Toast.makeText(this, "Add successful: " + word, Toast.LENGTH_SHORT).show();
-        else
+        } else
             Toast.makeText(this, "Add unsuccessful: " + word + " already added", Toast.LENGTH_SHORT).show();
     }
 
@@ -102,18 +104,23 @@ public class View_Home extends AppCompatActivity implements IView_Home {
 
     @Override
     public void deleteCallBack(String word, int status) {
-        if (status == 0)
+        if (status == 0) {
+            etWordDelete.setText("");
             Toast.makeText(this, "Delete successful: " + word, Toast.LENGTH_SHORT).show();
+        }
         else
             Toast.makeText(this, "Delete unsuccessful: " + word + " not found", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void updateCallBack(String word, int status) {
-        if (status == 0)
+        if (status == 0) {
+            etWordUpdate.setText("");
+            etMeaningUpdate.setText("");
             Toast.makeText(this, "Update successful: " + word, Toast.LENGTH_SHORT).show();
+        }
         else
-            Toast.makeText(this, "Update unsuccessful: " + word + " not found", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Update unsuccessful: " + word + " not found", Toast.LENGTH_SHORT).show();
     }
 
 }
