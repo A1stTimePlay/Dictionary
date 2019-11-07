@@ -19,7 +19,7 @@
             android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="Word"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
             android:maxLength="10"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvAdd" />
@@ -75,8 +75,8 @@
             android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="Meaning"
-            android:inputType="textPersonName"
-            android:maxLength="40"
+            android:inputType="textMultiLine"
+            android:maxLength="100"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etWordAdd" />
 
@@ -99,6 +99,7 @@
             android:layout_marginTop="16dp"
             android:focusable="false"
             android:hint="Word"
+            android:maxLength="10"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/number" />
 
@@ -111,6 +112,8 @@
             android:layout_marginBottom="24dp"
             android:focusable="false"
             android:hint="Meaning"
+            android:maxLength="100"
+            android:inputType="textMultiLine"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etWordRead" />
@@ -163,11 +166,10 @@
             android:id="@+id/line1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-
             android:layout_marginTop="24dp"
             android:background="@color/gray"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/write" />
+            app:layout_constraintTop_toBottomOf="@+id/etMeaningAdd" />
 
         <View
             android:id="@+id/line"
@@ -191,31 +193,33 @@
 
         <EditText
             android:id="@+id/etWordUpdate"
-            android:layout_width="wrap_content"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="Word"
+            android:maxLength="10"
             android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvUpdate" />
 
         <EditText
             android:id="@+id/etMeaningUpdate"
-            android:layout_width="wrap_content"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="Meaning"
-            android:inputType="textPersonName"
+            android:maxLength="100"
+            android:inputType="textMultiLine"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etWordUpdate" />
 
         <Button
             android:id="@+id/update"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="128dp"
             android:layout_marginEnd="24dp"
