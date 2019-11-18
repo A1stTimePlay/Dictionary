@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.dictionary.MainActivity;
+import com.example.dictionary.Presenter.IPresenter_Home;
 import com.example.dictionary.Presenter.Presenter_Home;
 import com.example.dictionary.R;
 
@@ -20,7 +21,7 @@ public class View_Home extends AppCompatActivity implements IView_Home {
     EditText etMeaningUpdate;
     EditText etWordAdd;
     EditText etMeaningAdd;
-    Presenter_Home presenter_home;
+    IPresenter_Home presenter_home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

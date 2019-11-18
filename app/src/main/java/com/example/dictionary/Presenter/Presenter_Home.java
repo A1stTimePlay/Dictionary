@@ -1,6 +1,7 @@
 package com.example.dictionary.Presenter;
 
 import com.example.dictionary.Model.Trie;
+import com.example.dictionary.View.IView_Home;
 import com.example.dictionary.View.View_Home;
 
 import java.io.File;
@@ -16,9 +17,9 @@ import static com.example.dictionary.MainActivity.tempMEANING;
 import static com.example.dictionary.MainActivity.tempWORD;
 
 public class Presenter_Home implements IPresenter_Home {
-    View_Home view_home;
+    IView_Home view_home;
 
-    public Presenter_Home(View_Home view_home) {
+    public Presenter_Home(IView_Home view_home) {
         this.view_home = view_home;
     }
 

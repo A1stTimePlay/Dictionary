@@ -10,11 +10,12 @@ import android.widget.TextView;
 
 import com.example.dictionary.MainActivity;
 import com.example.dictionary.Model.Trie;
+import com.example.dictionary.Presenter.IPresenter_Search;
 import com.example.dictionary.Presenter.Presenter_Search;
 import com.example.dictionary.R;
 
 public class View_Search extends AppCompatActivity implements IView_Search{
-    Presenter_Search presenter_search;
+    IPresenter_Search presenter_search;
     TextView tvSearchMeaning;
     Trie trie;
 
